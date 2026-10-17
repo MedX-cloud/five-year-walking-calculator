@@ -1,0 +1,12 @@
+﻿English offline calculator verification
+
+Model: GBM_1208_20260926; 300 trees, interaction depth 1; no refitting or recalibration.
+All 1,208 probabilities match the R implementation, including 740 validation patients.
+All 740 validation SHAP explanations match the saved analysis.
+Input mapping, fixed imputation and messages match R for 200 synthetic cases.
+99 split-threshold boundary cases passed. Numerical tolerance: 1e-12.
+Interaction checks passed: empty/first submission, unknown score, range validation, editing, reset and SHAP display.
+The complete page passed tests in an isolated DOM with network access disabled.
+These checks establish software consistency, not additional clinical validation or causal interpretation.
+
+Calculator.html SHA-256: e90e68b23bf99c5a67a98534575fa14ae8c2f544dbdd936d60b4880acb96a834
