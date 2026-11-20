@@ -10,23 +10,23 @@
 body{margin:0;color:#202020;background:#fff;font-family:'Segoe UI','Microsoft YaHei',sans-serif;font-size:15px;line-height:1.6}
 main{max-width:1180px;margin:35px auto;padding:0 24px 35px}
 h1{font-size:28px;font-weight:600;margin:0 0 8px}h2{font-size:19px;font-weight:600;margin:0 0 20px}
-p{margin:0 0 14px}.muted,.help{color:#666}.intro{max-width:920px;margin-bottom:30px}
+p{margin:0 0 14px}.muted,.help{color:#666}.research-note{margin-top:18px}.intro{max-width:920px;margin-bottom:30px}
 .layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:38px}
-.form-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 25px}
-.field{min-width:0;margin-bottom:18px}label{display:block;font-weight:500;margin-bottom:5px}
+.form-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 28px}
+.field{min-width:0;margin-bottom:22px}label{display:block;font-weight:500;margin-bottom:5px}
 input[type=number],select{width:100%;font:inherit;font-size:14px;min-height:38px;color:#222;background:white;border:1px solid #aaa;border-radius:3px;padding:6px 8px}
 input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #2d80c3;outline-offset:2px}
 .help{font-size:13px;line-height:1.6;margin:5px 0 0}.checkbox{font-size:14px;margin:8px 0 0}.checkbox input{margin:0 6px 0 0;vertical-align:middle}
 .result{border-left:1px solid #ddd;padding-left:30px;min-width:0}.probability{font-size:48px;line-height:1.2;color:#2d80c3;margin:18px 0 8px;font-variant-numeric:tabular-nums}
 .empty{padding-top:30px;color:#666}.error{color:#a3203f;margin-bottom:15px}.note{margin-top:16px}.note ul{padding-left:22px;margin:8px 0}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 12px}button{font:inherit;font-size:15px;padding:8px 18px;border:1px solid #aaa;border-radius:3px;background:white;cursor:pointer}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 12px}button{font:inherit;font-size:15px;padding:8px 18px;border:1px solid #aaa;border-radius:3px;background:white;cursor:pointer}
 .primary{background:#2d80c3;color:white;border-color:#2d80c3}.explanation{margin-top:35px;padding-top:25px;border-top:1px solid #ddd}
 .key{display:inline-block;width:11px;height:11px;margin-right:5px;background:#dc386f}.key.blue{background:#2d80c3;margin-left:14px}
 .shap-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) 78px;align-items:center;gap:20px;margin:20px 0}
 .shap-label{font-size:13px;overflow-wrap:anywhere}.shap-bar{width:100%;height:22px}.shap-value{text-align:right;font-size:13px;font-variant-numeric:tabular-nums}
 .shap-axis{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) 78px;gap:20px;font-size:12px}
 .axis-values{display:flex;justify-content:space-between;color:#202020}.shap-scale{text-align:center;font-size:13px;margin-top:6px}
-details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overflow-wrap:anywhere;margin-top:15px}.definitions ul{padding-left:22px}
+details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overflow-wrap:anywhere;margin-top:15px}
 @media(max-width:780px){.layout{grid-template-columns:1fr;gap:28px}.result{border-left:0;border-top:1px solid #ddd;padding:22px 0 0}main{margin-top:24px}}
 @media(max-width:700px){.shap-row{grid-template-columns:minmax(0,1fr) 78px;gap:6px 12px;margin:24px 0}.shap-label{grid-column:1/-1}.shap-axis{grid-template-columns:minmax(0,1fr) 78px;gap:12px}.axis-spacer{display:none}}
 @media(max-width:460px){.form-grid{grid-template-columns:minmax(0,1fr)}main{padding:0 16px 24px}h1{font-size:24px}}
@@ -35,16 +35,15 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
 <body>
 <main>
 <h1>Five-year walking prediction calculator</h1>
-<p class="muted">NSCISC 2021 public database | Final GBM | Offline version</p>
-<p class="intro">Use after initial inpatient rehabilitation baseline data collection is complete. The outcome is the ability to walk 150 feet at home, walk one street block outside, or walk up one flight of steps at post-injury year 5. Completing at least one task counts as a positive outcome; assistive devices are permitted.</p>
+<p class="intro">Estimates walking ability 5 years after injury using information from the initial inpatient rehabilitation admission assessment.</p>
 <noscript><p class="error">This preview does not support calculations. Download the file and open it in Chrome or Edge.</p></noscript>
 <div class="layout">
 <form id="clinical-form" novalidate autocomplete="off">
 <h2>Clinical inputs</h2>
 <div class="form-grid">
-<div class="field"><label for="stay">System acute medical unit stay (days)</label><input id="stay" type="number" min="1" max="8887" step="1"><p class="help">Total days hospitalized in the Model System acute/subacute medical unit.</p></div>
+<div class="field"><label for="stay">System acute medical unit stay (days)</label><input id="stay" type="number" min="1" max="8887" step="1"></div>
 <div class="field"><label for="vertebral">Vertebral injury (fracture or dislocation)</label><select id="vertebral"><option value="">Select...</option><option value="0">No</option><option value="1">Yes</option></select></div>
-<div class="field"><label for="associated">Associated major injury</label><select id="associated"><option value="">Select...</option><option value="0">No</option><option value="1">Yes</option><option value="NA">Unknown</option></select><p class="help">Major associated injury from the same trauma, as defined by NSCISC.</p></div>
+<div class="field"><label for="associated">Associated major injury</label><select id="associated"><option value="">Select...</option><option value="0">No</option><option value="1">Yes</option><option value="NA">Unknown</option></select></div>
 <div class="field"><label for="ventilation">Mechanical ventilation at rehabilitation admission</label><select id="ventilation"><option value="">Select...</option><option value="0">No ventilation</option><option value="1">Short-term use: pulmonary complications</option><option value="2">Ventilator-dependent / weaning</option><option value="3">Phrenic nerve stimulator</option><option value="4">Used; duration/type unknown</option><option value="5">CPAP for sleep apnea</option><option value="NA">Unknown</option></select></div>
 <div class="field"><div id="motor-field"><label for="motor">Acute ASIA motor total score (0–100)</label><input id="motor" type="number" min="0" max="100" step="1"></div><label class="checkbox" for="motor_unknown"><input id="motor_unknown" type="checkbox">ASIA motor score not testable or unknown</label></div>
 <div class="field"><label for="level">Neurologic level at acute admission</label><select id="level"><option value="">Select...</option><option value="Cervical">Cervical</option><option value="Thoracic">Thoracic</option><option value="Lumbar">Lumbar</option><option value="Sacral">Sacral</option><option value="Normal">Normal neurologic level</option><option value="Unknown">Unknown</option></select></div>
@@ -55,9 +54,8 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
 </div>
 <p id="error-message" class="error" role="alert" hidden></p>
 <div class="actions"><button id="calculate" type="submit" class="primary">Calculate probability</button><button id="reset" type="reset">Clear</button></div>
-<p class="help">Unknown values are imputed using the training-set median or mode. Acute medical unit stay and vertebral injury status must be known, together with at least one acute neurologic assessment.</p>
 </form>
-<section class="result" aria-label="Prediction"><h2>Prediction</h2><div id="prediction" aria-live="polite"><p class="empty">Enter the clinical information, then select Calculate probability.</p></div></section>
+<section class="result" aria-label="Prediction"><h2>Prediction</h2><div id="prediction" aria-live="polite"><p class="empty">No result yet.</p></div><p class="help research-note">Research demonstration only.</p></section>
 </div>
 <section id="explanation" class="explanation" hidden>
 <h2>Individual prediction explanation (SHAP)</h2>
@@ -66,13 +64,14 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
 <div id="shap-list"></div>
 <div class="shap-axis"><div class="axis-spacer"></div><div id="axis-values" class="axis-values"></div><div></div></div>
 <p class="shap-scale">SHAP contribution (percentage points)</p>
-<p class="help">Contributions are relative to the preprocessed training set. SHAP explains the model prediction; it does not establish causal effects.</p>
+<p class="help">SHAP values show how each input shifts the estimate from the model baseline. They do not establish causal effects.</p>
 </section>
-<details><summary>Variable definitions and model information</summary><div class="definitions">
-<p>The model was fitted in 468 training patients and evaluated in 117 internal holdout patients and 623 earlier-year validation patients. This calculator uses the same final model without refitting or recalibration.</p>
-<ul id="variable-definitions"></ul>
+<details><summary>Input definitions and model information</summary><div class="definitions">
+<p><strong>Five-year outcome.</strong> Completing at least one task: walking 150 feet at home, walking one block outdoors, or climbing one flight of stairs. Assistive devices are allowed. No clinical action threshold has been established.</p>
+<p><strong>Required inputs.</strong> Days hospitalized in the Model System acute/subacute medical unit, vertebral injury status, and at least one acute neurologic assessment.</p>
+<p>The fixed model was trained on 468 patients and evaluated in an internal holdout set of 117 patients and a separate cohort of 623 patients discharged in earlier years. Unknown values use training-set medians or modes.</p>
 <p>Associated major injury includes moderate or severe traumatic brain injury (GCS ≤12), nonvertebral fractures requiring surgery, severe facial injuries involving sensory organs, major chest injuries requiring a chest tube or mechanical ventilation, traumatic or surgically required limb amputation, severe hemorrhage, brachial plexus injury, and visceral injuries requiring surgery, arising from the same trauma.</p>
-<p>For research demonstration only. This probability is not the probability of independent walking; no clinical action threshold has been established. Inputs are processed in this browser without being uploaded or stored. Calculations also work offline.</p>
+<p>Calculations run offline in this browser. Entered values are not uploaded or stored.</p>
 <p id="model-version" class="muted"></p>
 </div></details>
 </main>
@@ -183,7 +182,7 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
   }
   function clearResult() {
     prediction.replaceChildren();
-    add("p", "Enter the clinical information, then select Calculate probability.", prediction, "empty");
+    add("p", "No result yet.", prediction, "empty");
     explanation.hidden = true;
     error.hidden = true;
     error.textContent = "";
@@ -204,7 +203,6 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
     prediction.replaceChildren();
     add("p", "Predicted probability of completing at least one walking task at post-injury year 5", prediction);
     add("div", (100 * result.probability).toFixed(1) + "%", prediction, "probability");
-    add("p", "Calculated from the entered information using the fixed model.", prediction, "muted");
     if (result.imputed.length) {
       const note = add("div", null, prediction, "note");
       add("p", "Training-set values used for imputation:", note);
@@ -270,8 +268,7 @@ details{margin-top:24px}summary{cursor:pointer}.definitions{font-size:13px;overf
     updateMotor();
     clearResult();
   });
-  model.variables.forEach(variable => add("li", model.labels_en[variable], document.getElementById("variable-definitions")));
-  document.getElementById("model-version").textContent = "Model version: " + model.version + " | Seed: " + model.seed;
+  document.getElementById("model-version").textContent = "Model version: " + model.version;
 })();
 </script>
 </body>

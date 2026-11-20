@@ -1,0 +1,393 @@
+{
+  "referenceCommit": "93facf4c665bbd6107fd657b4d7ca8cf2b38b598",
+  "modelVersion": "GBM_1208_20260926",
+  "variableOrder": [
+    "AHDaSyAc",
+    "AVertInj",
+    "AAsscInj",
+    "AUMVAdm",
+    "AASATotA",
+    "ANurLvlA_Cervical",
+    "ANurLvlA_Thoracic",
+    "ANurLvlA_Lumbar",
+    "AVoSphAd",
+    "AAnSnAdm",
+    "AASAImAd",
+    "ANCatAdm"
+  ],
+  "cases": [
+    {
+      "name": "Illustrative case",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "85",
+        "level": "Thoracic",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expected": {
+        "encoded": [
+          12,
+          0,
+          0,
+          0,
+          85,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "imputed": [],
+        "notes": [],
+        "probability": 0.9557160530256037,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          0.014018625320396029,
+          0,
+          0.0045456818107158115,
+          0.005766050278278789,
+          0.28181301316897234,
+          0,
+          -0.026253224257055237,
+          -0.0034081285805203842,
+          0.06853215160045295,
+          0.1121501137656641,
+          0.03572791265036268,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Fixed imputation and unseen ventilation category",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "0",
+        "associated": "NA",
+        "ventilation": "5",
+        "motor": null,
+        "level": "Unknown",
+        "contraction": "NA",
+        "pressure": "NA",
+        "ais": "NA",
+        "category": "1"
+      },
+      "expected": {
+        "encoded": [
+          12,
+          0,
+          0,
+          0,
+          50,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "imputed": [
+          "AAsscInj",
+          "AUMVAdm",
+          "AASATotA",
+          "ANurLvlA_Cervical",
+          "ANurLvlA_Thoracic",
+          "ANurLvlA_Lumbar",
+          "AVoSphAd",
+          "AAnSnAdm",
+          "AASAImAd"
+        ],
+        "notes": [
+          "The selected ventilation category was not observed in the training set. Following the original analysis, it is treated as unknown and imputed using the training-set mode."
+        ],
+        "probability": 0.6245882486487964,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          0.013817196853102214,
+          0,
+          0.0058979519171585264,
+          0.005873942618079776,
+          -0.019621876819704547,
+          0,
+          0.015960789939869376,
+          -0.005406961030707471,
+          -0.03615989221238243,
+          0.13120735762560892,
+          0.05019588248943536,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Immediately below a 12.5-day tree split",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "52",
+        "level": "Lumbar",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expected": {
+        "encoded": [
+          12,
+          0,
+          0,
+          0,
+          52,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "imputed": [],
+        "notes": [],
+        "probability": 0.9284269690390339,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          0.019278380093984013,
+          0,
+          0.005034343491049294,
+          0.006986735165100953,
+          0.04783904676498384,
+          0,
+          0.012539512681228281,
+          0.12311914881730132,
+          0.08522447403037729,
+          0.12287328656459284,
+          0.04270818416207942,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Immediately above a 12.5-day tree split",
+      "inputs": {
+        "stay": "13",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "52",
+        "level": "Lumbar",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expected": {
+        "encoded": [
+          13,
+          0,
+          0,
+          0,
+          52,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "imputed": [],
+        "notes": [],
+        "probability": 0.9054921535325126,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          -0.02078548646017278,
+          0,
+          0.005113214842081761,
+          0.00682152557263163,
+          0.05021970070296694,
+          0,
+          0.013214404356851396,
+          0.13067383610009284,
+          0.0877406904772339,
+          0.12578385440618123,
+          0.04388655626630898,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Immediately above a 52.5-point motor score split",
+      "inputs": {
+        "stay": "13",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "53",
+        "level": "Lumbar",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expected": {
+        "encoded": [
+          13,
+          0,
+          0,
+          0,
+          53,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "imputed": [],
+        "notes": [],
+        "probability": 0.959639982571298,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          -0.017182128701152984,
+          0,
+          0.004580446123034099,
+          0.006235476648656696,
+          0.16073204453884504,
+          0,
+          0.01038240033850389,
+          0.10664540097825019,
+          0.0741172959252425,
+          0.11432595345634958,
+          0.03697923599523233,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Stay beyond the training range and inconsistent AIS entry",
+      "inputs": {
+        "stay": "243",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "85",
+        "level": "Sacral",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "1",
+        "category": "0"
+      },
+      "expected": {
+        "encoded": [
+          243,
+          0,
+          0,
+          0,
+          85,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0
+        ],
+        "imputed": [],
+        "notes": [
+          "Acute medical unit stay is outside the training-set range (2–242 days); this prediction involves extrapolation.",
+          "AIS A is inconsistent with present voluntary anal contraction or deep anal pressure. Check the source record."
+        ],
+        "probability": 0.8662445087513114,
+        "baseline": 0.46282385726833675,
+        "shap": [
+          -0.10078644956512577,
+          0,
+          0.00512756097422931,
+          0.005449132296522448,
+          0.3373102274909955,
+          0,
+          0.01274030909447338,
+          -0.004134714029095339,
+          0.07649312422654592,
+          0.11445563013813964,
+          -0.043234169143710297,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Unknown vertebral injury is rejected",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "NA",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "85",
+        "level": "Thoracic",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expectedError": "Vertebral fracture or dislocation status must be known."
+    },
+    {
+      "name": "No known acute neurologic assessment is rejected",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": null,
+        "level": "Unknown",
+        "contraction": "NA",
+        "pressure": "NA",
+        "ais": "NA",
+        "category": "NA"
+      },
+      "expectedError": "At least one acute neurologic assessment must be known, consistent with the study inclusion criteria."
+    },
+    {
+      "name": "Out-of-range motor score is rejected",
+      "inputs": {
+        "stay": "12",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "101",
+        "level": "Thoracic",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expectedError": "The acute ASIA motor total score must be an integer from 0–100, or select the unknown-score checkbox."
+    },
+    {
+      "name": "Noninteger acute-care stay is rejected",
+      "inputs": {
+        "stay": "12.5",
+        "vertebral": "0",
+        "associated": "0",
+        "ventilation": "0",
+        "motor": "85",
+        "level": "Thoracic",
+        "contraction": "1",
+        "pressure": "1",
+        "ais": "0",
+        "category": "0"
+      },
+      "expectedError": "System acute medical unit stay must be an integer from 1 to 8887 days. Patients with an unknown stay or no admission to this unit are outside the study population."
+    }
+  ]
+}
